@@ -1,3 +1,5 @@
+import %workspace%/tools/cc_toolchain/bazel.rc
+
 # Default to an optimized build.
 build -c opt
 

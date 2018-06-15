@@ -3,6 +3,7 @@ load("@slime//tools:bitbucket.bzl", "bitbucket_archive")
 load("@slime//tools:github.bzl", "github_archive")
 load("@slime//tools:python.bzl", "python_repository")
 load("@slime//tools:numpy.bzl", "numpy_repository")
+load("@slime//tools:verilator.bzl", "verilator_repository")
 
 def default_workspace(mirrors = DEFAULT_MIRRORS):
     """Declares workspace repositories for all externals needed by slime (other
@@ -40,3 +41,5 @@ def default_workspace(mirrors = DEFAULT_MIRRORS):
 
     python_repository(name = "python")
     numpy_repository(name = "numpy")
+    verilator_repository(name = "verilator")
+
