@@ -33,7 +33,7 @@ cc_library(
     includes = ["include"],
     deps = [
         "@eigen",
-        "@numpy",
         "@python",
+        "@numpy",
     ],
 )

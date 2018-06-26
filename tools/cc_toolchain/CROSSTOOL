@@ -29,7 +29,7 @@ toolchain {
   abi_libc_version: "local"
   abi_version: "local"
   builtin_sysroot: ""
-  compiler: "gcc-6" # Modified for Drake.
+  compiler: "gcc-6" # Modified for Slime.
   compiler_flag: "-U_FORTIFY_SOURCE"
   compiler_flag: "-D_FORTIFY_SOURCE=1"
   compiler_flag: "-fstack-protector"
@@ -49,7 +49,7 @@ toolchain {
   cxx_builtin_include_directory: "/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed"
   cxx_builtin_include_directory: "/usr/include/x86_64-linux-gnu"
   cxx_builtin_include_directory: "/usr/include"
-  cxx_flag: "-std=c++1y" # Modified for Drake.
+  cxx_flag: "-std=c++1y" # Modified for Slime.
   host_system_name: "local"
   linker_flag: "-lstdc++"
   linker_flag: "-lm"

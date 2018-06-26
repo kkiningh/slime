@@ -8,5 +8,10 @@ py_test(
     name = "ram_test",
     srcs = ["ram_test.py"],
     deps = [":ram"],
-    size = "enormous",
+)
+
+py_binary(
+    name = "shell",
+    srcs = ["shell.py"],
+    data = ["//slime/rtl/bindings:verilator.so"],
 )

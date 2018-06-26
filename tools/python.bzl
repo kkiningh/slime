@@ -28,14 +28,10 @@ load("@slime//tools:execute.bzl", "which")
 load("@slime//tools:os.bzl", "determine_os")
 
 def _impl(repository_ctx):
-    python_config = which(repository_ctx, "python{}-config".format(
-        repository_ctx.attr.version,
-    ))
+    python_config = repository_ctx.which("python-config")
 
     if not python_config:
-        fail("Could NOT find python{}-config".format(
-            repository_ctx.attr.version,
-        ))
+        fail("Could NOT find python-config")
 
     result = repository_ctx.execute([python_config, "--includes"])
 
@@ -81,9 +77,7 @@ def _impl(repository_ctx):
 
     if os_result.is_macos:
         for i in reversed(range(len(linkopts))):
-            if linkopts[i].find("python{}".format(
-                repository_ctx.attr.version,
-            )) != -1:
+            if linkopts[i].find("python") != -1:
                 linkopts.pop(i)
         linkopts = ["-undefined dynamic_lookup"] + linkopts
 
@@ -126,6 +120,5 @@ cc_library(
 
 python_repository = repository_rule(
     _impl,
-    attrs = {"version": attr.string(default = "2")},
     local = True,
 )

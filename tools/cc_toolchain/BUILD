@@ -1,9 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 
-# Note that we would typically name this file BUILD.bazel, however Bazel fails
-# to find the CROSSTOOL file if we do that.
-
-# The default toolchain selector for Drake.
+# The default toolchain selector for Slime.
 #
 # On OS X, we do not support any custom values for the --compiler flag. It
 # must be unspecified.  The CROSSTOOL file maps this to the system default

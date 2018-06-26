@@ -23,12 +23,10 @@ Arguments:
 load("@slime//tools:execute.bzl", "which")
 
 def _impl(repository_ctx):
-    python = which(repository_ctx, "python{}".format(
-        repository_ctx.attr.python_version,
-    ))
+    python = repository_ctx.which("python")
 
     if not python:
-        fail("Could NOT find python{}".format(repository_ctx.attr.version))
+        fail("Could NOT find python")
 
     result = repository_ctx.execute([
         python,
@@ -69,6 +67,5 @@ cc_library(
 
 numpy_repository = repository_rule(
     _impl,
-    attrs = {"python_version": attr.string(default = "2")},
     local = True,
 )

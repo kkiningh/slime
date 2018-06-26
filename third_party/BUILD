@@ -8,3 +8,8 @@ exports_files(
         "//tools/cc_toolchain:__pkg__",
     ],
 )
+
+exports_files(
+    ["org_veripool_verilator/src/config_build.h"],
+    licenses = ["notice"],
+)
