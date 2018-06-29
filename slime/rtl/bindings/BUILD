@@ -3,6 +3,7 @@ cc_binary(
     srcs = ["verilator.cpp"],
     deps = [
         "@slime//slime/rtl:ram",
+        "@slime//slime/rtl:addrgen",
         "@verilator//:libverilator",
         "@pybind11",
     ],

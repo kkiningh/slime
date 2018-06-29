@@ -3,6 +3,7 @@
 #include "pybind11/pybind11.h"
 
 #include "slime/rtl/VRam_1RW_1C.h"
+#include "slime/rtl/VAdderGen.h"
 
 namespace py = pybind11;
 
@@ -17,4 +18,11 @@ PYBIND11_MODULE(verilator, m) {
     .def_readwrite("addr", &VRam_1RW_1C::addr)
     .def_readwrite("data_in", &VRam_1RW_1C::data_in)
     .def_readonly("data_out", &VRam_1RW_1C::data_out);
+
+  py::class_<VAdderGen>(m, "AdderGen")
+    .def(py::init<>())
+    .def("eval", &VAdderGen::eval)
+    .def("final", &VAdderGen::final)
+    .def_readwrite("clock", &VAdderGen::clock)
+    .def_readwrite("reset", &VAdderGen::reset);
 }

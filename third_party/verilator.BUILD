@@ -156,13 +156,34 @@ cc_library(
         "include/verilated_heavy.h",
         "include/verilated_imp.h",
         "include/verilated_syms.h",
-        "include/verilated_sym_props.h",
     ],
     hdrs = [
         "include/verilated.h",
         "include/verilated_config.h",
+        "include/verilated_sym_props.h",
         "include/verilatedos.h",
     ],
+    strip_include_prefix = "include/",
+    visibility = ["//visibility:public"],
+)
+
+# TODO(kkiningh): Hack - can't seem to get includes working properly
+genrule(
+    name = "svdpi",
+    srcs = ["include/vltstd/svdpi.h"],
+    outs = ["include/svdpi.h"],
+    cmd = "cp $(<) $(@D)"
+)
+
+cc_library(
+    name = "libverilator_dpi",
+    srcs = ["include/verilated_dpi.cpp"],
+    hdrs = [
+      "include/verilated_dpi.h",
+      "include/vltstd/svdpi.h",
+      ":svdpi",
+    ],
+    deps = [":libverilator"],
     strip_include_prefix = "include/",
     visibility = ["//visibility:public"],
 )
