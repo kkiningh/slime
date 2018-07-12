@@ -9,11 +9,10 @@ cc_verilator_library(
 )
 
 cc_verilator_library(
-    name = "addrgen",
-    srcs = ["addrgen.sv"],
+    name = "AdderGen",
+    srcs = ["AdderGen.sv"],
     top = "AdderGen",
     modules = [
         "__024unit", # Unnamed top level module
-        "AdderGenPkg",
     ],
 )

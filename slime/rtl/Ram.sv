@@ -32,7 +32,8 @@ module AXI_Ram #(
   input                     axi_bready,
   output [1:0]              axi_bresp
 );
-  reg [DATA_BITS-1:0] mem [0:((1<<ADDR_BITS)-1)] /* verilator public */;
+  // Use bit here to make it easier to communicate with verilator
+  bit [DATA_BITS-1:0] mem [0:((1<<ADDR_BITS)-1)];
 
   // Disable write interface;
   assign axi_awvalid = 0;
@@ -65,8 +66,9 @@ module AXI_Ram #(
 
       // Read address from mem and latch output
       if (arvalid && !rvalid) begin
-        rvalid <= 1'b1;
-        rdata  <= mem[araddr];
+        arvalid <= 1'b0;
+        rvalid  <= 1'b1;
+        rdata   <= mem[araddr];
       end
 
       // Transfer read data to AXI bus

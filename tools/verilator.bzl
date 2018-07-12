@@ -101,10 +101,15 @@ gen_cc_verilator = rule(
 )
 
 # TODO(kkiningh) Support debug/optmized verilator builds
-def cc_verilator_library(name, srcs, top, hdrs=[], deps=[], modules=[],
-                         prefix="V", trace=False, dpi=False, vopts=None, **kwargs):
+def cc_verilator_library(name, srcs, top, hdrs=[], deps=[], modules=None,
+                         prefix=None, trace=False, dpi=False, vopts=None,
+                         **kwargs):
     # "real" prefix to use
-    prefix = prefix + top
+    if prefix == None:
+      prefix = "V" + top
+
+    if modules == None:
+      modules = []
 
     # Default outputs
     couts = []
@@ -119,6 +124,11 @@ def cc_verilator_library(name, srcs, top, hdrs=[], deps=[], modules=[],
         filename = "{prefix}__Dpi".format(prefix=prefix)
         couts.extend([filename + ".cpp"])
         houts.extend([filename + ".h"])
+
+    # If tracing is enabled, add trace outputs
+    if trace:
+        couts.append("{prefix}__Trace.cpp".format(prefix=prefix))
+        couts.append("{prefix}__Trace__Slow.cpp".format(prefix=prefix))
 
     # add .h and .cpp for each module listed
     for module in modules:

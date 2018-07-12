@@ -136,6 +136,9 @@ cc_library(
         "-Wno-unneeded-internal-declaration",
         "-Wno-deprecated-register",
         "-Wno-invalid-noreturn",
+        # TODO: C++17 doesn't allow the register keyword.
+        # This should probably be fixed another way
+        "-Dregister= ",
     ],
     defines = ["YYDEBUG"],
     strip_include_prefix = "src/",
@@ -153,14 +156,16 @@ cc_library(
     name = "libverilator",
     srcs = [
         "include/verilated.cpp",
-        "include/verilated_heavy.h",
+        "include/verilated_vcd_c.cpp",
         "include/verilated_imp.h",
         "include/verilated_syms.h",
     ],
     hdrs = [
         "include/verilated.h",
         "include/verilated_config.h",
+        "include/verilated_heavy.h",
         "include/verilated_sym_props.h",
+        "include/verilated_vcd_c.h",
         "include/verilatedos.h",
     ],
     strip_include_prefix = "include/",
@@ -172,7 +177,8 @@ genrule(
     name = "svdpi",
     srcs = ["include/vltstd/svdpi.h"],
     outs = ["include/svdpi.h"],
-    cmd = "cp $(<) $(@D)"
+    cmd = "cp $(<) $(@D)",
+    visibility = ["//visibility:public"],
 )
 
 cc_library(

@@ -2,8 +2,8 @@ cc_binary(
     name = "verilator.so",
     srcs = ["verilator.cpp"],
     deps = [
-        "@slime//slime/rtl:ram",
-        "@slime//slime/rtl:addrgen",
+        "@slime//slime/rtl:Ram",
+        "@slime//slime/rtl:AdderGen",
         "@verilator//:libverilator",
         "@pybind11",
     ],
